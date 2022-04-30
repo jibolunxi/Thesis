@@ -26,4 +26,6 @@
 ##### 2.4 去除只有一个人参与的项目
 - get_mul_developers_pros()
 - 代码冗余，已移除
+##### 2.5 处理结果
+![img.png](images/data_res.png)
 

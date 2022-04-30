@@ -1,9 +1,8 @@
 from source_data import projects_filter, get_pros_id, watchers_filter, repo_labels_filter, \
     project_members_filter, commits_filter, pull_requests_filter, pr_history_filter_by_status, pr_and_history_merge, \
-    get_mul_developers_pros, merged_pr_filter, projects_filter_by_committer
+    get_mul_developers_pros, merged_pr_filter, projects_filter_by_committer, divide_pull_request, divide_commits
 
 
-# 数据筛选
 def data_filter():
     # projects
     projects_filter()
@@ -20,6 +19,9 @@ def data_filter():
     pr_history_filter_by_status()
     pr_and_history_merge()
 
+    # divide by month
+    divide_pull_request()
+    divide_commits()
     print('end')
 
 
