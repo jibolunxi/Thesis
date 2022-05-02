@@ -29,3 +29,9 @@
 ##### 2.5 处理结果
 ![img.png](images/data_res.png)
 
+#### 3 网络构建
+##### 3.1 fork网络构建
+- 依据new_projects表中的forked属性构建fork网络
+- 依据fork网络和org属性打标签
+##### 3.2 commit网络构建
+- 依据项目中共同的commits人数进行权重计算（分月）

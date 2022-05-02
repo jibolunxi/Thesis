@@ -1,7 +1,10 @@
 import csv
 
-SOURCE_DATA_DIRECTORY = 'G:\\thesis2022\\second_filter\\'
-TARGET_DIRECTORY = 'G:\\networks\\'
+from model import get_all_repos
+from utils import get_every_month
+
+SOURCE_DATA_DIRECTORY = 'G:\\thesis2022\\data\\second_filter\\'
+TARGET_DIRECTORY = 'G:\\thesis2022\\networks\\'
 
 
 def fork_network():
@@ -33,5 +36,36 @@ def fork_network():
                 nodes_id.add(pro[-4])
                 nodes_writer.writerow([pro[-4], pros_name[pro[-4]]])
 
+
+def commit_network():
+    months = get_every_month('2001-01-01', '2019-01-01')
+    repo_ids = get_all_repos()
+    for month in months:
+        links_file = TARGET_DIRECTORY + 'commits\\commit_' + month + '_links.csv'
+        links_write = open(links_file, 'a', encoding='utf-8', newline='')
+        links_writer = csv.writer(links_write)
+        links_writer.writerow(['Source', 'Target', 'Weight', 'Type'])
+
+        commits_dict = {}
+        commit_file = SOURCE_DATA_DIRECTORY + 'commit_by_month\\commit_' + month + '.csv'
+        commit_read = open(commit_file, 'r', encoding='utf-8')
+        commit_reader = csv.reader(commit_read)
+        for commit in commit_reader:
+            if commit[4] in repo_ids:
+                if commits_dict.__contains__(commit[4]):
+                    commits_dict[commit[4]].add(commit[3])
+                else:
+                    commits_set = set()
+                    commits_set.add(commit[3])
+                    commits_dict[commit[4]] = commits_set
+
+        nodes = list(commits_dict.keys())
+        length = len(nodes)
+        for index_i in range(length):
+            for index_j in range(index_i + 1, length):
+                weight = len(commits_dict[nodes[index_i]] & commits_dict[nodes[index_j]]) / \
+                         max(len(commits_dict[nodes[index_i]]), len(commits_dict[nodes[index_j]]))
+                if weight > 0:
+                    links_writer.writerow([nodes[index_i], nodes[index_j], weight, 'undirected'])
 
 

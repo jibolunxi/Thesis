@@ -60,3 +60,15 @@ def label_by_fork_and_org():
     labels_writer.writerow(['Id', 'Label'])
     for node_id in nodes_label:
         labels_writer.writerow([node_id, nodes_label[node_id]])
+
+
+def get_all_repos():
+    repo_ids = set()
+    labels_file = TARGET_DIRECTORY + 'eco_labels.csv'
+    labels_read = open(labels_file, 'r', encoding='utf-8')
+    labels_reader = csv.reader(labels_read)
+    next(labels_reader)
+    for label in labels_reader:
+        repo_ids.add(label[0])
+
+    return repo_ids
