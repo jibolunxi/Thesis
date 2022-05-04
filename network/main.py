@@ -1,9 +1,10 @@
-from network import fork_network, commit_network
+from network import fork_network, commit_network, pull_request_network
 
 
 def network_build():
     # fork_network()
-    commit_network()
+    # commit_network()
+    pull_request_network()
 
 
 def main():

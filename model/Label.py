@@ -1,7 +1,7 @@
 import csv
 
-SOURCE_DATA_DIRECTORY = 'G:\\thesis2022\\networks\\'
-TARGET_DIRECTORY = 'G:\\thesis2022\\ecosystems\\'
+SOURCE_DATA_DIRECTORY = '/media/omen/data/thesis2022/networks/'
+TARGET_DIRECTORY = '/media/omen/data/thesis2022/ecosystems/'
 
 
 def label_by_fork_and_org():
